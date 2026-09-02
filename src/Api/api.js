@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logout } from "../features/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://matanashopapi.theirin.space/api",
+  baseUrl: import.meta.env.VITE_API_BASE_URL,
   prepareHeaders: (headers, { getState }) => {
     // Add stored access token so protected endpoints succeed
     const token = getState()?.auth?.access;
