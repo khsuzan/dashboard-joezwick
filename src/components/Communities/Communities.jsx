@@ -23,12 +23,13 @@ import {
   useUpdateMapCommunitiesMutation,
 } from "../../Api/dashboardApi";
 
-const BASE_URL = "http://10.10.29.168:8005";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function mediaUrl(path) {
   if (!path) return null;
   if (path.startsWith("http")) return path;
-  return `${BASE_URL}${path}`;
+  const base = BASE_URL ? BASE_URL.replace(/\/api\/?$/, "") : "";
+  return `${base}${path.startsWith("/") ? "" : "/"}${path}`;
 }
 
 function SelectMapCommunitiesModal({ open, onClose }) {

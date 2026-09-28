@@ -27,12 +27,13 @@ import { useEffect, useRef, useState } from "react";
 
 /* ─── helpers ───*/
 
-const BASE = "http://10.10.29.168:8005";
+const BASE = import.meta.env.VITE_API_BASE_URL;
 
 function resolveUrl(url) {
   if (!url) return null;
   if (url.startsWith("http")) return url;
-  return `${BASE}${url}`;
+  const base = BASE ? BASE.replace(/\/api\/?$/, "") : "";
+  return `${base}${url.startsWith("/") ? "" : "/"}${url}`;
 }
 
 function getFlyerUrl(flyerImage) {
